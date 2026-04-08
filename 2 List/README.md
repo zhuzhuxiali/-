@@ -33,6 +33,7 @@
 
 java 中扩容，每次扩容新增原先容量的 1/2
 ```
+ //>>是右移一位运算符，相当于整数2，并向下取整
  int newCapacity = oldCapacity + (oldCapacity >> 1);
 ```
 
