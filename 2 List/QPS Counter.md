@@ -9,7 +9,8 @@
 ```Java
 	//AtomicInteger是原子整数类，在多线程环境下线程安全，不会出现错误（普通int在多线程会出问题）
 	static AtomicInteger qpsCount = 100; //线程安全
-    static volatile long lastSenconds =  System.currentTimeMillis()/1000;
+    //volatile是内存可见性修饰符，保证多线程下lastSenconds的修改能立刻被所有线程看到，不会出现缓存不一致
+    static volatile long lastSenconds =  System.currentTimeMillis()/1000;//把当前时间转成秒数，判断是否进入下一个1秒窗口
     
     //1 计数器 
     public static boolean tryAcquire() {
