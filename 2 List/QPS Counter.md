@@ -15,20 +15,24 @@
     //1 计数器 
     public static boolean tryAcquire() {
 
+        //获取当前时间的秒数
         long current = System.currentTimeMillis()/1000;
+        //当前秒数==上一个记录的秒数，则还在同一个1秒窗口内
         if(current == lastSenconds){
-            
-            if (qpsCount-- > 0) {//CAS api
-                return true;
+
+			//同一个窗口内：检查还有没有剩余额度
+			//qpsCount先和0比大小，再减1（后置--的优先级）
+            if (qpsCount-- > 0) {//CAS api：原子性减1，同时判断是否>0
+                return true;//还有额度：放行请求
             } else {
-                //限流
+                //限流：额度用完了，拒绝请求
                 return false;
             }
-            
+
         } else{//下一个时间窗口
-            lastSenconds = current;
-            qpsCount = 100;
-            return true;
+            lastSenconds = current;//更新时间窗口
+            qpsCount = 100;//重置额度为100，新窗口重新计数
+            return true;//新窗口第一个请求，直接放行
         }   
     }
 ```
