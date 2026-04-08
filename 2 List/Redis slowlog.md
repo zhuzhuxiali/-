@@ -1,5 +1,10 @@
 # Redis slowlog
 
+Redis：远程字典服务器，开源、基于内存、高性能、Key-Value型NoSQL数据库，数据主要放内存，当电脑重启会丢失数据
+Redis Slowlog(慢查询日志)是Redis内置的性能诊断工具，专门记录执行时间超过指定阈值的命令，快速定位导致Redis变慢的元凶
+
+和MySQL区别：
+*MySQL存底层数据+Redis做热点缓存，提升系统速度
 
 redis中的slowlog使用链表来保存
 
