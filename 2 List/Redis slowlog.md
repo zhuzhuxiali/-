@@ -28,7 +28,7 @@ struct redisServer {
 
 
     // 服务器配置 slowlog-max-len 选项的值
-    unsigned long slowlog_max_len;
+    unsigned long slowlog_max_len;//unsigned无符号，代表只能存非负数
 
 
     // ...
@@ -40,6 +40,7 @@ struct redisServer {
 一条slowlog entry标识
 
 ```
+//typedef是类型别名关键词
 typedef struct slowlogEntry {
 
 
@@ -63,7 +64,7 @@ typedef struct slowlogEntry {
     int argc;
 
 
-} slowlogEntry;
+} slowlogEntry;//struct的类型别名：slowlogEntry
 
 ```
 
